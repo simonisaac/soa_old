@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://admin.services.policy.canonical.soa.msilm.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://admin.services.policy.canonical.soa.msilm.org/" version="1.0">
+<xs:element name="retrivePolicy" type="tns:retrivePolicy"/>
+<xs:element name="retrivePolicyResponse" type="tns:retrivePolicyResponse"/>
+<xs:complexType name="retrivePolicy">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="policyId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="retrivePolicyResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Policy" type="tns:policy"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="policy">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="enquiry" type="tns:enquiry"/>
+      <xs:element minOccurs="0" name="policyId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="enquiry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="enquiryId" type="xs:string"/>
+      <xs:element minOccurs="0" name="section" type="tns:section"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="section">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sectionId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

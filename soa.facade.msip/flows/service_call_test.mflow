@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="Service Call Test">
+    <global-element type="http://www.mulesoft.org/schema/mule/stdio/connector" name="STDIO" entity-id="16c1ca28-080d-4cdb-87a9-a8df26f1d779">
+        <properties>
+            <property value="stdioConnector" name="name"/>
+            <property value="1234" name="messageDelayTime"/>
+            <property value="abc" name="outputMessage"/>
+            <property value="prompt: " name="promptMessage"/>
+            <property value="456" name="promptMessageCode"/>
+            <property name="outputMessageCode"/>
+            <property name="resourceBundle"/>
+            <property name="dispatcherPoolFactory-ref"/>
+            <property name="dynamicNotification"/>
+            <property name="validateConnections"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="EchoFacade">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" entity-id="24235ec9-107c-4d25-aaa7-60d0769f9272">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/stdio/endpoint" name="STDIO" entity-id="55564f63-17c8-4c23-a717-f6537e9796f5">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="IN" name="system"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="address"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="exchange-pattern"/>
+                    <property value="stdioConnector" name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                </properties>
+            </endpoint>
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.customTransformer" name="TestTransformer" entity-id="ed142f8a-3a3a-43f1-9799-d7d3664d88f1">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property value="org.msilm.soa.facade.msip.test.TestTransformer" name="class"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="PolicyService" entity-id="6740edcf-ce04-424b-b7b9-653a24c4909d">
+                <properties>
+                    <property name="configuration-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/cxf/jaxws-client" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="retrieveEnquiry" name="operation"/>
+                    <property name="serviceClass"/>
+                    <property name="decoupledEndpoint"/>
+                    <property value="org.msilm.services.policy.PolicyAdminService" name="clientClass"/>
+                    <property value="PolicyAdminServicePort" name="port"/>
+                    <property name="mtomEnabled"/>
+                    <property value="classpath:/wsdl/msip_required/PolicyAdminService.wsdl" name="wsdlLocation"/>
+                    <property name="enableMuleSoapHeaders"/>
+                </properties>
+            </pattern>
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="fc3af36b-ca73-495e-a444-538de0da11d3">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property value="http://localhost:8082/PolicyAdminService" name="address"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

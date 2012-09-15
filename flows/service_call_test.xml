@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:stdio="http://www.mulesoft.org/schema/mule/stdio" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.3.0" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd 
+http://www.mulesoft.org/schema/mule/stdio http://www.mulesoft.org/schema/mule/stdio/current/mule-stdio.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd ">
+    <stdio:connector name="stdioConnector" messageDelayTime="1234" outputMessage="abc" promptMessage="prompt: " promptMessageCode="456" doc:name="STDIO"/>
+    <flow name="EchoFacade" doc:name="EchoFacade">
+        <stdio:inbound-endpoint system="IN" responseTimeout="10000" exchange-pattern="request-response" connector-ref="stdioConnector" doc:name="STDIO"/>
+        <echo-component doc:name="Echo"/>
+        <custom-transformer class="org.msilm.soa.facade.msip.test.TestTransformer" doc:name="TestTransformer"/>
+        <cxf:jaxws-client operation="echo" clientClass="org.msilm.services.echo.EchoService" port="EchoServicePort" wsdlLocation="classpath:/wsdl/msip_required/EchoService.wsdl" doc:name="EchoService"/>
+        <http:outbound-endpoint exchange-pattern="request-response" address="http://localhost:9090/EchoService" doc:name="HTTP"/>
+        <!-- outbound-endpoint exchange-pattern="request-response" address="http://localhost:9090/EchoService" doc:name="Generic"/ -->
+    </flow>
+</mule>

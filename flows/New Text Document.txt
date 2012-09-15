@@ -1,0 +1,73 @@
+broken facade
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:stdio="http://www.mulesoft.org/schema/mule/stdio" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.3.0" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd 
+http://www.mulesoft.org/schema/mule/stdio http://www.mulesoft.org/schema/mule/stdio/current/mule-stdio.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd ">
+    <stdio:connector name="stdioConnector1" messageDelayTime="1234" outputMessage="abc" promptMessage="bcd" promptMessageCode="456" doc:name="STDIO"/>
+    <flow name="Service_Call_TestFlow1" doc:name="Service_Call_TestFlow1">
+        <stdio:inbound-endpoint system="IN" responseTimeout="10000" connector-ref="stdioConnector1" doc:name="STDIO"/>
+        <cxf:jaxws-client operation="retrieveEnquiry" clientClass="org.msilm.services.policy.PolicyAdminService" port="PolicyAdminServicePort" wsdlLocation="classpath:/wsdl/msip_required/PolicyAdminService.wsdl" doc:name="Retrieve Enquiry"/>
+    </flow>
+</mule>
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:stdio="http://www.mulesoft.org/schema/mule/stdio" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.3.0" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd 
+http://www.mulesoft.org/schema/mule/stdio http://www.mulesoft.org/schema/mule/stdio/current/mule-stdio.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd ">
+    <stdio:connector name="stdioConnector" messageDelayTime="1234" outputMessage="abc" promptMessage="prompt: " promptMessageCode="456" doc:name="STDIO"/>
+    <flow name="PolicyAdminFacade" doc:name="PolicyAdminFacade">
+        <stdio:inbound-endpoint system="IN" connector-ref="stdioConnector" doc:name="STDIO"/>
+        <echo-component doc:name="Echo"/>
+        <custom-transformer class="org.msilm.soa.facade.msip.test.TestTransformer" doc:name="TestTransformer"/>
+        <cxf:jaxws-client operation="retrieveEnquiry" clientClass="org.msilm.services.policy.PolicyAdminService" port="PolicyAdminServicePort" wsdlLocation="classpath:/wsdl/msip_required/PolicyAdminService.wsdl" doc:name="PolicyAdminService"/>
+        <outbound-endpoint address="http://localhost:8082/PolicyAdminService" doc:name="Generic"/>
+    </flow>
+</mule>
+
+
+
+
+
+
+
+
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>2.6.1</version>
+				<executions>
+					<execution>
+						<id>generate-organisation-wsdl</id>
+						<phase>package</phase>
+						<configuration>
+							<sourceRoot>${project.build.directory}/generated/orgservice</sourceRoot>
+							<className>org.msilm.services.organisation.OrganisationService</className>
+						</configuration>
+						<goals>
+							<goal>java2wsdl</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>generate-policy-wsdl</id>
+						<phase>package</phase>
+						<configuration>
+							<sourceRoot>${project.build.directory}/generated/policyservice</sourceRoot>
+							<className>org.msilm.services.policy.PolicyAdminService</className>
+						</configuration>
+						<goals>
+							<goal>java2wsdl</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>

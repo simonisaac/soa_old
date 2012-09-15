@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PolicyAdminFacade" targetNamespace="http://admin.services.policy.canonical.soa.msilm.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://admin.services.policy.canonical.soa.msilm.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://admin.services.policy.canonical.soa.msilm.org/" schemaLocation="IPolicyAdminService_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="retrivePolicyResponse">
+    <wsdl:part name="parameters" element="tns:retrivePolicyResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="retrivePolicy">
+    <wsdl:part name="parameters" element="tns:retrivePolicy">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IPolicyAdminService">
+    <wsdl:operation name="retrivePolicy">
+      <wsdl:input name="retrivePolicy" message="tns:retrivePolicy">
+    </wsdl:input>
+      <wsdl:output name="retrivePolicyResponse" message="tns:retrivePolicyResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PolicyAdminFacadeSoapBinding" type="tns:IPolicyAdminService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="retrivePolicy">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="retrivePolicy">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrivePolicyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PolicyAdminFacade">
+    <wsdl:port name="IPolicyAdminServicePort" binding="tns:PolicyAdminFacadeSoapBinding">
+      <soap:address location="http://localhost:9090/IPolicyAdminServicePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

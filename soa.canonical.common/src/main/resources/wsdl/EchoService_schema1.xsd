@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:tns="http://echo.services.test.canonical.soa.msilm.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://echo.services.test.canonical.soa.msilm.org/">
+  <xsd:element name="echo" type="tns:echo"/>
+  <xsd:complexType name="echo">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="echoResponse" type="tns:echoResponse"/>
+  <xsd:complexType name="echoResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

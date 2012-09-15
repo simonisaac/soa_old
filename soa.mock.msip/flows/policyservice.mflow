@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="PolicyService">
+    <flow SubFlow="false" name="PolicyServiceFlow1">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <lane hadOnlyOneElement="false" entity-id="26995c64-a9de-4e87-9da4-ce4d3f9669f4">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="0f3ad332-e732-451b-816a-abb47f2c2e4c">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property value="localhost" name="host"/>
+                    <property value="8082" name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="Policy Interface" entity-id="7ef80a40-9184-4f65-a263-44671f44a6bc">
+                <properties>
+                    <property value="" name="wsdlLocation"/>
+                    <property value="PolicyAdminServicePort" name="port"/>
+                    <property value="false" name="validationEnabled"/>
+                    <property value="org.msilm.services.policy.PolicyAdminService" name="serviceClass"/>
+                    <property value="" name="bindingId"/>
+                    <property value="" name="DATABINDING"/>
+                    <property value="" name="service"/>
+                    <property value="http://www.mulesoft.org/schema/mule/cxf/simple-service" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="false" name="mtomEnabled"/>
+                    <property value="true" name="enableMuleSoapHeaders"/>
+                    <property value="" name="configuration-ref"/>
+                    <property value="" name="namespace"/>
+                    <property-collection name="">
+                        <property value="" name="DATABINDING"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/schemaLocations;608091719"/>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="Java" entity-id="c28bd519-575b-4e0c-97c3-76d54d07af55">
+                <properties>
+                    <property value="" name="ref"/>
+                    <property value="org.msilm.services.policy.PolicyAdminServiceImpl" name="class"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;1801802541">
+                        <property value="" name="ref"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

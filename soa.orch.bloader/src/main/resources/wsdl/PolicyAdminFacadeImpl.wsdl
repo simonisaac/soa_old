@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PolicyAdminFacade" targetNamespace="http://service.msipfacade.soa.msilm.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.msipfacade.soa.msilm.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.msipfacade.soa.msilm.org/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://service.msipfacade.soa.msilm.org/">
+    <xsd:element name="retriveEnquiry" type="tns:retriveEnquiry"/>
+    <xsd:complexType name="retriveEnquiry">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="arg0" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="retriveEnquiryResponse" type="tns:retriveEnquiryResponse"/>
+    <xsd:complexType name="retriveEnquiryResponse">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="return"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="retriveEnquiryResponse">
+    <wsdl:part name="parameters" element="tns:retriveEnquiryResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="retriveEnquiry">
+    <wsdl:part name="parameters" element="tns:retriveEnquiry">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PolicyAdminFacade">
+    <wsdl:operation name="retriveEnquiry">
+      <wsdl:input name="retriveEnquiry" message="tns:retriveEnquiry">
+    </wsdl:input>
+      <wsdl:output name="retriveEnquiryResponse" message="tns:retriveEnquiryResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PolicyAdminFacadeSoapBinding" type="tns:PolicyAdminFacade">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="retriveEnquiry">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="retriveEnquiry">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retriveEnquiryResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PolicyAdminFacade">
+    <wsdl:port name="PolicyAdminFacadeImplPort" binding="tns:PolicyAdminFacadeSoapBinding">
+      <soap:address location="http://localhost:9090/hello"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

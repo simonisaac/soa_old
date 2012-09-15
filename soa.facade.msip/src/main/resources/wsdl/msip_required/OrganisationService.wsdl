@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="OrganisationService" targetNamespace="http://organisation.services.msilm.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://organisation.services.msilm.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://organisation.services.msilm.org/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://organisation.services.msilm.org/">
+    <xs:complexType name="organisation">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="address" type="xs:string"/>
+            <xs:element minOccurs="0" name="name" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="createOrganisation" type="createOrganisation"/>
+    <xs:complexType name="createOrganisation">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="arg0" type="organisation"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="createOrganisationResponse" type="createOrganisationResponse"/>
+    <xs:complexType name="createOrganisationResponse">
+        <xs:sequence>
+            <xs:element name="return" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="retrieveOrganisation" type="retrieveOrganisation"/>
+    <xs:complexType name="retrieveOrganisation">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="retrieveOrganisationResponse" type="retrieveOrganisationResponse"/>
+    <xs:complexType name="retrieveOrganisationResponse">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="organisation"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="createOrganisation">
+    <wsdl:part name="parameters" element="tns:createOrganisation">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createOrganisationResponse">
+    <wsdl:part name="parameters" element="tns:createOrganisationResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="retrieveOrganisationResponse">
+    <wsdl:part name="parameters" element="tns:retrieveOrganisationResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="retrieveOrganisation">
+    <wsdl:part name="parameters" element="tns:retrieveOrganisation">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="OrganisationServicePortType">
+    <wsdl:operation name="createOrganisation">
+      <wsdl:input name="createOrganisation" message="tns:createOrganisation">
+    </wsdl:input>
+      <wsdl:output name="createOrganisationResponse" message="tns:createOrganisationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveOrganisation">
+      <wsdl:input name="retrieveOrganisation" message="tns:retrieveOrganisation">
+    </wsdl:input>
+      <wsdl:output name="retrieveOrganisationResponse" message="tns:retrieveOrganisationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OrganisationServiceSoapBinding" type="tns:OrganisationServicePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createOrganisation">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createOrganisation">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createOrganisationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveOrganisation">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="retrieveOrganisation">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveOrganisationResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OrganisationService">
+    <wsdl:port name="OrganisationServicePort" binding="tns:OrganisationServiceSoapBinding">
+      <soap:address location="http://localhost:9090/hello"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

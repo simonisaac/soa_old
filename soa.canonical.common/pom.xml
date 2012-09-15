@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.msilm.soa</groupId>
+		<artifactId>soa</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>soa.canonical.common</artifactId>
+	<properties>
+		<cxf.version>2.6.1</cxf.version>
+	</properties>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- Need Java 5, which is the default since v2.3 of the maven-compiler-plugin. -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.5.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!-- Generate WSDL from Java -->
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-java2ws-plugin</artifactId>
+				<version>${cxf.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.cxf</groupId>
+						<artifactId>cxf-rt-frontend-jaxws</artifactId>
+						<version>${cxf.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.cxf</groupId>
+						<artifactId>cxf-rt-frontend-simple</artifactId>
+						<version>${cxf.version}</version>
+					</dependency>
+				</dependencies>
+
+				<executions>
+					<execution>
+						<id>java2ws-echoService</id>
+						<phase>process-classes</phase>
+						<configuration>
+							<className>org.msilm.soa.canonical.test.services.echo.EchoService</className>
+							<genWsdl>true</genWsdl>
+							<!-- output the types to a separate schema file -->
+							<argline>-createxsdimports</argline>
+							<verbose>true</verbose>
+						</configuration>
+						<goals>
+							<goal>java2ws</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>java2ws-policyService</id>
+						<phase>process-classes</phase>
+						<configuration>
+							<className>org.msilm.soa.canonical.policy.services.admin.IPolicyAdminService</className>
+							<genWsdl>true</genWsdl>
+							<!-- output the types to a separate schema file -->
+							<argline>-createxsdimports</argline>
+							<verbose>true</verbose>
+						</configuration>
+						<goals>
+							<goal>java2ws</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			
+		</plugins>
+	</build>
+
+</project>

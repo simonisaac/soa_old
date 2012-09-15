@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PolicyAdminService" targetNamespace="http://policy.services.msilm.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://policy.services.msilm.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://policy.services.msilm.org/"
+			attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://policy.services.msilm.org/">
+			<xs:complexType name="section">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="name" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="enquiry">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="name" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="retrieveSection" type="retrieveSection" />
+			<xs:complexType name="retrieveSection">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="arg0" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="retrieveSectionResponse" type="retrieveSectionResponse" />
+			<xs:complexType name="retrieveSectionResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="section" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="createSection" type="createSection" />
+			<xs:complexType name="createSection">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="arg0" type="section" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="createSectionResponse" type="createSectionResponse" />
+			<xs:complexType name="createSectionResponse">
+				<xs:sequence>
+					<xs:element name="return" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="retrieveEnquiry" type="retrieveEnquiry" />
+			<xs:complexType name="retrieveEnquiry">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="arg0" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="retrieveEnquiryResponse" type="retrieveEnquiryResponse" />
+			<xs:complexType name="retrieveEnquiryResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" type="enquiry" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="createEnquiry" type="createEnquiry" />
+			<xs:complexType name="createEnquiry">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="arg0" type="enquiry" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="createEnquiryResponse" type="createEnquiryResponse" />
+			<xs:complexType name="createEnquiryResponse">
+				<xs:sequence>
+					<xs:element name="return" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="retrieveSectionResponse">
+		<wsdl:part name="parameters" element="tns:retrieveSectionResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createSection">
+		<wsdl:part name="parameters" element="tns:createSection">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createEnquiryResponse">
+		<wsdl:part name="parameters" element="tns:createEnquiryResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createEnquiry">
+		<wsdl:part name="parameters" element="tns:createEnquiry">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createSectionResponse">
+		<wsdl:part name="parameters" element="tns:createSectionResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="retrieveSection">
+		<wsdl:part name="parameters" element="tns:retrieveSection">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="retrieveEnquiryResponse">
+		<wsdl:part name="parameters" element="tns:retrieveEnquiryResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="retrieveEnquiry">
+		<wsdl:part name="parameters" element="tns:retrieveEnquiry">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="PolicyAdminServicePortType">
+		<wsdl:operation name="retrieveSection">
+			<wsdl:input name="retrieveSection" message="tns:retrieveSection">
+			</wsdl:input>
+			<wsdl:output name="retrieveSectionResponse" message="tns:retrieveSectionResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createSection">
+			<wsdl:input name="createSection" message="tns:createSection">
+			</wsdl:input>
+			<wsdl:output name="createSectionResponse" message="tns:createSectionResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="retrieveEnquiry">
+			<wsdl:input name="retrieveEnquiry" message="tns:retrieveEnquiry">
+			</wsdl:input>
+			<wsdl:output name="retrieveEnquiryResponse" message="tns:retrieveEnquiryResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createEnquiry">
+			<wsdl:input name="createEnquiry" message="tns:createEnquiry">
+			</wsdl:input>
+			<wsdl:output name="createEnquiryResponse" message="tns:createEnquiryResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="PolicyAdminServiceSoapBinding" type="tns:PolicyAdminServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="createSection">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="createSection">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="createSectionResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="retrieveSection">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="retrieveSection">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="retrieveSectionResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="retrieveEnquiry">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="retrieveEnquiry">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="retrieveEnquiryResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createEnquiry">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="createEnquiry">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="createEnquiryResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="PolicyAdminService">
+		<wsdl:port name="PolicyAdminServicePort" binding="tns:PolicyAdminServiceSoapBinding">
+			<soap:address location="http://localhost:8082/PolicyAdminService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
